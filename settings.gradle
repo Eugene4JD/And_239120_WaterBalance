@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "AND_2021_293120_WaterBalanceApp"
