@@ -71,6 +71,11 @@ public class HomeFragment extends Fragment {
                 homeViewModel.saveCurrentData(100.0,0.0);
         });
 
+        homeViewModel.getRecords().observe(getViewLifecycleOwner(), records -> {
+            if (records!=null)
+                homeViewModel.setDisplayList(records);
+        });
+
         saveButton.setOnClickListener(v -> {
             homeViewModel.saveRecord(10.2, 30.8);
         });

@@ -22,12 +22,14 @@ public class HomeViewModel extends AndroidViewModel {
     private final UserRepository userRepository;
     private final RecordRepository recordRepository;
     private final CurrentDataRepository currentDataRepository;
+    private ArrayList<Record> displayList;
 
     public HomeViewModel(Application app) {
         super(app);
         userRepository = UserRepository.getInstance(app);
         recordRepository = RecordRepository.getInstance();
         currentDataRepository = CurrentDataRepository.getInstance();
+        displayList = new ArrayList<>();
     }
 
     public void init() throws IllegalAccessException {
@@ -41,15 +43,18 @@ public class HomeViewModel extends AndroidViewModel {
         return userRepository.getCurrentUser();
     }
 
+    public LiveData<List<Record>> getRecords() {return  recordRepository.getRecord();}
+
     public void saveRecord(Double goal, Double progress) {
-        List<Record> recordList = recordRepository.getRecord().getValue();
-        if (recordList == null) {
-            recordList = new ArrayList<>();
-        }
-        recordList.add(new Record(goal,progress));
-        recordList.add(new Record(goal,progress));
-        recordList.add(new Record(goal,progress));
-        recordRepository.saveRecord(recordList);
+        displayList.add(new Record(goal,progress));
+        displayList.add(new Record(goal,progress));
+        displayList.add(new Record(goal,progress));
+        recordRepository.saveRecord(displayList);
+    }
+
+    public void setDisplayList(ArrayList<Record> displayList)
+    {
+        this.displayList = displayList;
     }
 
     public void saveCurrentData(Double goal, Double progress) {
@@ -58,6 +63,11 @@ public class HomeViewModel extends AndroidViewModel {
 
     public void signOut() {
         userRepository.signOut();
+    }
+
+    public void setDisplayList(List<Record> records)
+    {
+        displayList = (ArrayList<Record>) records;
     }
 
 
