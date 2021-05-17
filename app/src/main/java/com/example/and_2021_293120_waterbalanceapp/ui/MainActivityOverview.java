@@ -3,6 +3,7 @@ package com.example.and_2021_293120_waterbalanceapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.and_2021_293120_waterbalanceapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,6 +39,7 @@ public class MainActivityOverview extends AppCompatActivity {
         viewModel.getCurrentUser().observe(this, user -> {
             if (user != null) {
                 String message = "Welcome " + user.getDisplayName();
+                Toast.makeText(this.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
             } else
                 startLoginActivity();
         });
