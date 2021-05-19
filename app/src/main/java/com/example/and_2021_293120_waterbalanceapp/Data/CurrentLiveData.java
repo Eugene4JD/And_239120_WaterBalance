@@ -13,8 +13,14 @@ public class CurrentLiveData extends LiveData<CurrentData> {
     public final ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
-            CurrentData currentData = snapshot.getValue(CurrentData.class);
-            setValue(currentData);
+            try {
+                CurrentData currentData = snapshot.getValue(CurrentData.class);
+                setValue(currentData);
+            }
+            catch (Exception e){
+
+            }
+
         }
 
         @Override

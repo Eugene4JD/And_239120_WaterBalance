@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="First Section">
-
-        <CheckBoxPreference
-            android:key="checkbox_preference"
-            android:title="ABOBA"
-            android:defaultValue="ABOBA"/>
-
+        android:title="Set your goal in liters per record">
         <EditTextPreference
-            android:key="edittext_preference"
-            android:title="ABOBA"
-            android:summary="ABOBA"
-            android:dialogTitle="ABOBA"
-            android:dependency="checkbox_preference" />
-
+            android:key="goal_pref"
+            android:title="Goal in liters"
+            android:summary="Set goal"
+            android:dialogTitle="Set goal" />
     </PreferenceCategory>
 
 

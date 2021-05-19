@@ -1,13 +1,5 @@
 package com.example.and_2021_293120_waterbalanceapp.Repository;
 
-import android.content.SharedPreferences;
-import android.nfc.Tag;
-import android.provider.Contacts;
-import android.util.Log;
-
-import androidx.lifecycle.LiveData;
-
-import com.example.and_2021_293120_waterbalanceapp.Data.CurrentLiveData;
 import com.example.and_2021_293120_waterbalanceapp.Data.Record;
 import com.example.and_2021_293120_waterbalanceapp.Data.RecordLiveData;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +7,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecordRepository {
@@ -45,7 +38,10 @@ public class RecordRepository {
 
     public void saveRecord(List<Record> records) {
         myRef.setValue(records);
+    }
 
+    public void removeRecords() {
+        myRef.setValue(new ArrayList<Record>());
     }
 
     public RecordLiveData getRecord() {return records;}

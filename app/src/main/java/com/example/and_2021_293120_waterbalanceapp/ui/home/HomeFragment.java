@@ -1,11 +1,14 @@
 package com.example.and_2021_293120_waterbalanceapp.ui.home;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +23,7 @@ import com.example.and_2021_293120_waterbalanceapp.ui.SignInActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private HomeViewModel homeViewModel;
     private Button saveButton;
@@ -29,6 +32,7 @@ public class HomeFragment extends Fragment {
     private Button buttonDecrease;
     private Button signOutButton;
     private TextView progress_textView;
+    private ProgressBar progressBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +50,8 @@ public class HomeFragment extends Fragment {
 
         this.signOutButton = root.findViewById(R.id.sign_out_button);
 
+        this.progressBar = root.findViewById(R.id.progress_bar);
+
         return root;
     }
 
@@ -56,32 +62,33 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
         try {
             homeViewModel.init();
-        }
-        catch (IllegalAccessException e)
-        {
+        } catch (IllegalAccessException e) {
             startActivity(new Intent(getContext(), SignInActivity.class));
         }
 
-
-
         homeViewModel.getCurrentData().observe(getViewLifecycleOwner(), currentData -> {
-            if (currentData!=null)
+            if (currentData != null) {
                 progress_textView.setText(currentData.toString());
-            else
-                homeViewModel.saveCurrentData(100.0,0.0);
+                progressBar.setProgress((int) (currentData.getProgress() / currentData.getGoal() * 100));
+            } else
+                homeViewModel.saveCurrentData(0.0);
         });
 
+        homeViewModel.getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+
         homeViewModel.getRecords().observe(getViewLifecycleOwner(), records -> {
-            if (records!=null)
+            if (records != null) {
                 homeViewModel.setDisplayList(records);
+            }
         });
 
         saveButton.setOnClickListener(v -> {
-            homeViewModel.saveRecord(10.2, 30.8);
+            homeViewModel.saveRecord(homeViewModel.getCurrentData().getValue().getProgress());
+            homeViewModel.saveCurrentData(0.0);
         });
 
         resetButton.setOnClickListener(v -> {
-
+            homeViewModel.saveCurrentData(0.0);
         });
 
         signOutButton.setOnClickListener(v -> {
@@ -89,15 +96,26 @@ public class HomeFragment extends Fragment {
         });
 
         buttonIncrease.setOnClickListener(v -> {
-                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getGoal(), homeViewModel.getCurrentData().getValue().getProgress() + 10);
+            if (homeViewModel.getCurrentData().getValue() == null)
+                homeViewModel.saveCurrentData(0.0);
+            else
+                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 10);
         });
 
 
         buttonDecrease.setOnClickListener(v -> {
             if (homeViewModel.getCurrentData().getValue() == null)
-                homeViewModel.saveCurrentData(100.0, 0.0);
+                homeViewModel.saveCurrentData(0.0);
             else
-                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getGoal(), homeViewModel.getCurrentData().getValue().getProgress() - 10);
+                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 10);
         });
+    }
+
+
+
+
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
+    {
+        this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 10);
     }
 }

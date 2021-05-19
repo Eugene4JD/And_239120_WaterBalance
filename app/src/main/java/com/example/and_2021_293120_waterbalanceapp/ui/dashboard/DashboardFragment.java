@@ -15,14 +15,18 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.and_2021_293120_waterbalanceapp.R;
+import com.example.and_2021_293120_waterbalanceapp.ui.MainActivityOverviewViewModel;
 
 public class DashboardFragment extends PreferenceFragmentCompat {
 
     private DashboardViewModel dashboardViewModel;
-    private ListPreference listPreference;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences,rootKey);
+        dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+        dashboardViewModel.getText();
     }
+
+
 }

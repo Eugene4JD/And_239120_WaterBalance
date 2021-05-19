@@ -1,11 +1,13 @@
 package com.example.and_2021_293120_waterbalanceapp.ui.home;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.preference.PreferenceManager;
 
 import com.example.and_2021_293120_waterbalanceapp.Data.CurrentData;
 import com.example.and_2021_293120_waterbalanceapp.Data.Record;
@@ -22,6 +24,7 @@ public class HomeViewModel extends AndroidViewModel {
     private final UserRepository userRepository;
     private final RecordRepository recordRepository;
     private final CurrentDataRepository currentDataRepository;
+    private SharedPreferences sharedPreferences;
     private ArrayList<Record> displayList;
 
     public HomeViewModel(Application app) {
@@ -30,6 +33,7 @@ public class HomeViewModel extends AndroidViewModel {
         recordRepository = RecordRepository.getInstance();
         currentDataRepository = CurrentDataRepository.getInstance();
         displayList = new ArrayList<>();
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(app.getBaseContext());
     }
 
     public void init() throws IllegalAccessException {
@@ -45,20 +49,13 @@ public class HomeViewModel extends AndroidViewModel {
 
     public LiveData<List<Record>> getRecords() {return  recordRepository.getRecord();}
 
-    public void saveRecord(Double goal, Double progress) {
-        displayList.add(new Record(goal,progress));
-        displayList.add(new Record(goal,progress));
-        displayList.add(new Record(goal,progress));
+    public void saveRecord(Double progress) {
+        displayList.add(new Record(Double.parseDouble(sharedPreferences.getString("goal_pref","101.0")),progress));
         recordRepository.saveRecord(displayList);
     }
 
-    public void setDisplayList(ArrayList<Record> displayList)
-    {
-        this.displayList = displayList;
-    }
-
-    public void saveCurrentData(Double goal, Double progress) {
-        currentDataRepository.saveCurrentData(goal,progress);
+    public void saveCurrentData(Double progress) {
+        currentDataRepository.saveCurrentData(Double.parseDouble(sharedPreferences.getString("goal_pref","101.0")),progress);
     }
 
     public void signOut() {
@@ -67,8 +64,8 @@ public class HomeViewModel extends AndroidViewModel {
 
     public void setDisplayList(List<Record> records)
     {
-        displayList = (ArrayList<Record>) records;
+        this.displayList = (ArrayList<Record>) records;
     }
 
-
+    public SharedPreferences getSharedPreferences() {return sharedPreferences;}
 }
