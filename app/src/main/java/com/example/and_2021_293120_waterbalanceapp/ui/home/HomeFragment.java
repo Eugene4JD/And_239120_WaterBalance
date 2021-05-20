@@ -69,8 +69,9 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
                 new ViewModelProvider(this).get(HomeViewModel.class);
         try {
             homeViewModel.init();
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             startActivity(new Intent(getContext(), SignInActivity.class));
+            getActivity().finish();
         }
 
         homeViewModel.getCurrentData().observe(getViewLifecycleOwner(), currentData -> {
@@ -103,25 +104,29 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         });
 
         buttonDecreaseHundred.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue().getProgress() - 100 < 0) {
-                Snackbar.make(getView(), "The progress can not go below zero", Snackbar.LENGTH_LONG)
-                        .setActionTextColor(Color.RED)
+            if (homeViewModel.getCurrentData().getValue().getProgress() - 100 < 0)
+            {
+                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
+                       .setActionTextColor(Color.RED)
                         .show();
-            } else
+            }
+            else
                 this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 100);
         });
 
         buttonIncreaseTwentyFive.setOnClickListener(v -> {
-            this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 25);
+                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 25);
         });
 
 
         buttonDecreaseTwentyFive.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue().getProgress() - 25 < 0) {
-                Snackbar.make(getView(), "The progress can not go below zero", Snackbar.LENGTH_LONG)
+            if (homeViewModel.getCurrentData().getValue().getProgress() - 25 < 0)
+            {
+                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
                         .setActionTextColor(Color.RED)
                         .show();
-            } else
+            }
+            else
                 this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 25);
         });
 
@@ -130,17 +135,22 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         });
 
         buttonDecreaseFive.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue().getProgress() - 5 < 0) {
-                Snackbar.make(getView(), "The progress can not go below zero", Snackbar.LENGTH_LONG)
+            if (homeViewModel.getCurrentData().getValue().getProgress() - 5 < 0)
+            {
+                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
                         .setActionTextColor(Color.RED)
                         .show();
-            } else
+            }
+            else
                 this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 5);
         });
     }
 
 
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
+    {
         this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress());
     }
 }

@@ -22,9 +22,8 @@ public class MainActivityOverview extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(MainActivityOverviewViewModel.class);
-        checkIfSignedIn();
         setContentView(R.layout.activity_main_overview2);
+        viewModel = new ViewModelProvider(this).get(MainActivityOverviewViewModel.class);
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -33,6 +32,7 @@ public class MainActivityOverview extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+        checkIfSignedIn();
     }
 
     private void checkIfSignedIn() {
@@ -47,6 +47,5 @@ public class MainActivityOverview extends AppCompatActivity {
 
     private void startLoginActivity() {
         startActivity(new Intent(this, SignInActivity.class));
-        finish();
     }
 }

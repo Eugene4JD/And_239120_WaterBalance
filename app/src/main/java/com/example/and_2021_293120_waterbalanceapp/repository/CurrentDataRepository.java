@@ -14,8 +14,7 @@ public class CurrentDataRepository {
     private CurrentLiveData currentLiveData;
 
 
-    private CurrentDataRepository() {
-    }
+    private CurrentDataRepository() { }
 
     public static synchronized CurrentDataRepository getInstance() {
         if (instance == null)
