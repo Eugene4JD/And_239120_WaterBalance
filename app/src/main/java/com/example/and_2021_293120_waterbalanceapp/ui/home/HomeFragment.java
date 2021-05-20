@@ -2,6 +2,7 @@ package com.example.and_2021_293120_waterbalanceapp.ui.home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.and_2021_293120_waterbalanceapp.Data.CurrentData;
 import com.example.and_2021_293120_waterbalanceapp.R;
 import com.example.and_2021_293120_waterbalanceapp.ui.SignInActivity;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -28,9 +30,12 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
     private HomeViewModel homeViewModel;
     private Button saveButton;
     private Button resetButton;
-    private Button buttonIncrease;
-    private Button buttonDecrease;
-    private Button signOutButton;
+    private Button buttonIncreaseTwentyFive;
+    private Button buttonDecreaseTwentyFive;
+    private Button buttonIncreaseFive;
+    private Button buttonDecreaseFive;
+    private Button buttonIncreaseHundred;
+    private Button buttonDecreaseHundred;
     private TextView progress_textView;
     private ProgressBar progressBar;
 
@@ -40,17 +45,23 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
 
         this.progress_textView = root.findViewById(R.id.text_progress);
 
-        this.buttonDecrease = root.findViewById(R.id.button_decr);
+        this.buttonDecreaseFive = root.findViewById(R.id.button_decr);
 
-        this.buttonIncrease = root.findViewById(R.id.button_incr);
+        this.buttonIncreaseFive = root.findViewById(R.id.button_incr);
+
+        this.buttonDecreaseHundred = root.findViewById(R.id.button_decr_100);
+
+        this.buttonIncreaseHundred = root.findViewById(R.id.button_inc_100);
 
         this.saveButton = root.findViewById(R.id.save_record_button);
 
         this.resetButton = root.findViewById(R.id.reset_button);
 
-        this.signOutButton = root.findViewById(R.id.sign_out_button);
-
         this.progressBar = root.findViewById(R.id.progress_bar);
+
+        this.buttonIncreaseTwentyFive = root.findViewById(R.id.button_incr_25);
+
+        this.buttonDecreaseTwentyFive = root.findViewById(R.id.button_decr_25);
 
         return root;
     }
@@ -91,23 +102,50 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
             homeViewModel.saveCurrentData(0.0);
         });
 
-        signOutButton.setOnClickListener(v -> {
-            homeViewModel.signOut();
+        buttonIncreaseHundred.setOnClickListener(v -> {
+            this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 100);
         });
 
-        buttonIncrease.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue() == null)
-                homeViewModel.saveCurrentData(0.0);
+        buttonDecreaseHundred.setOnClickListener(v -> {
+            if (homeViewModel.getCurrentData().getValue().getProgress() - 100 < 0)
+            {
+                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
+                       .setActionTextColor(Color.RED)
+                        .show();
+            }
             else
-                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 10);
+                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 100);
+        });
+
+        buttonIncreaseTwentyFive.setOnClickListener(v -> {
+                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 25);
         });
 
 
-        buttonDecrease.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue() == null)
-                homeViewModel.saveCurrentData(0.0);
+        buttonDecreaseTwentyFive.setOnClickListener(v -> {
+            if (homeViewModel.getCurrentData().getValue().getProgress() - 25 < 0)
+            {
+                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
+                        .setActionTextColor(Color.RED)
+                        .show();
+            }
             else
-                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 10);
+                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 25);
+        });
+
+        buttonIncreaseFive.setOnClickListener(v -> {
+            this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 5);
+        });
+
+        buttonDecreaseFive.setOnClickListener(v -> {
+            if (homeViewModel.getCurrentData().getValue().getProgress() - 5 < 0)
+            {
+                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
+                        .setActionTextColor(Color.RED)
+                        .show();
+            }
+            else
+                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 5);
         });
     }
 
@@ -116,6 +154,6 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
     {
-        this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 10);
+        this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress());
     }
 }

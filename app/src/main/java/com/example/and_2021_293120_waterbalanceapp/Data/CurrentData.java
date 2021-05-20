@@ -29,6 +29,14 @@ public class CurrentData {
 
     public String toString()
     {
-        return this.getProgress() + " / " + this.getGoal();
+        return fmt(this.getProgress()) + " / " + fmt(this.getGoal());
+    }
+
+    private static String fmt(double d)
+    {
+        if(d == (long) d)
+            return String.format("%d",(long)d);
+        else
+            return String.format("%s",d);
     }
 }

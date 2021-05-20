@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
-        android:title="Set your goal in liters per record">
         <EditTextPreference
             android:key="goal_pref"
-            android:title="Goal in liters"
+            android:title="@string/goal_in_millilitres"
             android:summary="Set goal"
             android:dialogTitle="Set goal" />
-    </PreferenceCategory>
+        <Preference
+        android:title="@string/sign_out"
+        android:key="@string/sign_out"
+        android:summary="@string/press_here_to_sign_out_from_your_account"
+        />
 
 
 </PreferenceScreen>

@@ -31,19 +31,19 @@ import com.example.and_2021_293120_waterbalanceapp.Repository.RecordRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsViewModel extends ViewModel {
+public class RecordsGraphViewModel extends ViewModel {
     private final RecordRepository recordRepository;
     private ArrayList<Record> displayList;
     private final Cartesian3d area3d;
     private final Area3d series1;
     private final Area3d series2;
 
-    public NotificationsViewModel() {
+    public RecordsGraphViewModel() {
         recordRepository = RecordRepository.getInstance();
         displayList = new ArrayList<>();
         area3d = AnyChart.area3d();
 
-        area3d.xAxis(0).labels().format("${%Value}");
+        area3d.xAxis(0).labels().format("{%Value}");
 
         area3d.animation(true);
 
@@ -51,33 +51,17 @@ public class NotificationsViewModel extends ViewModel {
         area3d.xAxis(0).title("Year/Month/Day");
         area3d.xAxis(0).labels().padding(5d, 5d, 0d, 5d);
 
-        area3d.title("The cost of ACME\\'s shares<br/>' +\n" +
-                "    '<span style=\"color:#212121; font-size: 13px;\">Statistics was collected from site N during September</span>");
+        area3d.title("Your records overview");
 
         area3d.title().useHtml(true);
         area3d.title().padding(0d, 0d, 20d, 0d);
 
         List<DataEntry> seriesData = new ArrayList<>();
-        seriesData.add(new CustomDataEntry("1986", 162, 42));
-        seriesData.add(new CustomDataEntry("1987", 134, 54));
-        seriesData.add(new CustomDataEntry("1988", 116, 26));
-        seriesData.add(new CustomDataEntry("1989", 122, 32));
-        seriesData.add(new CustomDataEntry("1990", 178, 68));
-        seriesData.add(new CustomDataEntry("1991", 144, 54));
-        seriesData.add(new CustomDataEntry("1992", 125, 35));
-        seriesData.add(new CustomDataEntry("1993", 176, 66));
-        seriesData.add(new CustomDataEntry("1994", 156, 80));
-        seriesData.add(new CustomDataEntry("1995", 195, 120));
-        seriesData.add(new CustomDataEntry("1996", 215, 115));
-        seriesData.add(new CustomDataEntry("1997", 176, 36));
-        seriesData.add(new CustomDataEntry("1998", 167, 47));
-        seriesData.add(new CustomDataEntry("1999", 142, 72));
-        seriesData.add(new CustomDataEntry("2000", 117, 37));
-        seriesData.add(new CustomDataEntry("2001", 113, 23));
-        seriesData.add(new CustomDataEntry("2002", 132, 30));
-        seriesData.add(new CustomDataEntry("2003", 146, 46));
-        seriesData.add(new CustomDataEntry("2004", 169, 59));
-        seriesData.add(new CustomDataEntry("2005", 184, 44));
+        seriesData.add(new CustomDataEntry("0", 0, 0));
+        seriesData.add(new CustomDataEntry("0", 0, 0));
+        seriesData.add(new CustomDataEntry("0", 0, 0));
+        seriesData.add(new CustomDataEntry("0", 0, 0));
+
 
         Set set = Set.instantiate();
         set.data(seriesData);
@@ -85,12 +69,12 @@ public class NotificationsViewModel extends ViewModel {
         Mapping series2Data = set.mapAs("{ x: 'x', value: 'value2' }");
 
         series1 = area3d.area(series1Data);
-        series1.name("ACME Share Price");
+        series1.name("Goal in millilitres");
         series1.hovered().markers(false);
         series1.hatchFill("diagonal", "#000", 0.6d, 10d);
 
         series2 = area3d.area(series2Data);
-        series2.name("The Competitor\\'s Share Price");
+        series2.name("Your progress in millilitres");
         series2.hovered().markers(false);
         series2.hatchFill(HatchFillType.DIAGONAL_BRICK, "#000", 0.6d, 10d);
 
@@ -133,8 +117,10 @@ public class NotificationsViewModel extends ViewModel {
 
         List<DataEntry> seriesData = new ArrayList<>();
         for (int i = 0; i < displayList.size(); i++) {
-            seriesData.add(new CustomDataEntry(Integer.toString(i), displayList.get(i).getGoal(), displayList.get(i).getProgress()));
+            seriesData.add(new CustomDataEntry(displayList.get(i).getTimeStamp(), displayList.get(i).getGoal(), displayList.get(i).getProgress()));
         }
+        if (seriesData.size() == 0)
+            seriesData.add(new CustomDataEntry("0",0,0));
         Set set = Set.instantiate();
         set.data(seriesData);
         Mapping series1Data = set.mapAs("{ x: 'x', value: 'value' }");

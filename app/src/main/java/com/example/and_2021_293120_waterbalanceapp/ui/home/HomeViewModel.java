@@ -58,10 +58,6 @@ public class HomeViewModel extends AndroidViewModel {
         currentDataRepository.saveCurrentData(Double.parseDouble(sharedPreferences.getString("goal_pref","101.0")),progress);
     }
 
-    public void signOut() {
-        userRepository.signOut();
-    }
-
     public void setDisplayList(List<Record> records)
     {
         this.displayList = (ArrayList<Record>) records;

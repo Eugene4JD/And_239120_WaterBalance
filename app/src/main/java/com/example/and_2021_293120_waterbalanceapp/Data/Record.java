@@ -1,9 +1,13 @@
 package com.example.and_2021_293120_waterbalanceapp.Data;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Record {
     private double goal;
     private double progress;
+    private String timeStamp;
 
     public Record() {
     }
@@ -11,6 +15,7 @@ public class Record {
     public Record(double goal, double progress){
         this.progress = progress;
         this.goal = goal;
+        this.timeStamp = new SimpleDateFormat("dd/MM/yy HH:mm:ss").format(new Date());
     }
 
     public double getGoal()
@@ -23,6 +28,8 @@ public class Record {
         return progress;
     }
 
+    public String getTimeStamp() {return timeStamp;}
+
     public void setGoal(double goal){
         this.goal = goal;
     }
@@ -30,4 +37,6 @@ public class Record {
     public void setProgress(double progress){
         this.progress = progress;
     }
+
+    public void setTimeStamp(String timeStamp) {this.timeStamp = timeStamp;}
 }

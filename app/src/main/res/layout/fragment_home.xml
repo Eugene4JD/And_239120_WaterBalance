@@ -12,10 +12,10 @@
         android:layout_height="200dp"
         android:indeterminateOnly="false"
         android:progressDrawable="@drawable/circle"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:progress="60" />
 
     <TextView
@@ -26,8 +26,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="@+id/progress_bar"
         app:layout_constraintStart_toStartOf="@+id/progress_bar"
-        app:layout_constraintTop_toTopOf="@+id/progress_bar"
-        tools:text="60%">
+        app:layout_constraintTop_toTopOf="@+id/progress_bar">
     </TextView>
 
     <Button
@@ -35,60 +34,79 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="-10%"
+        android:text="@string/_5_decrease"
         app:layout_constraintStart_toStartOf="@+id/progress_bar"
         app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
     <Button
         android:id="@+id/button_incr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+10%"
+        android:text="@string/_5_increase"
         app:layout_constraintEnd_toEndOf="@+id/progress_bar"
         app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/ic_baseline_opacity_24"
-        app:layout_constraintBottom_toTopOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#D4F1F9" />
+        app:tint="@color/teal_700" />
 
     <Button
         android:id="@+id/save_record_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/green"
         android:text="@string/fui_button_text_save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button_incr"
-        app:layout_constraintStart_toStartOf="@+id/button_decr"
-        app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+        app:layout_constraintEnd_toEndOf="@+id/button_inc_100"
+        app:layout_constraintTop_toBottomOf="@+id/button_inc_100" />
 
     <Button
         android:id="@+id/reset_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:text="reset"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.222"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        android:backgroundTint="@color/red"
+        android:layout_marginTop="15dp"
+        android:text="@string/reset"
+        app:layout_constraintStart_toStartOf="@+id/button_decr_100"
+        app:layout_constraintTop_toBottomOf="@+id/button_decr_100" />
 
     <Button
-        android:id="@+id/sign_out_button"
+        android:id="@+id/button_inc_100"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign out"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        android:text="@string/_100mlIncrease"
+        app:layout_constraintEnd_toEndOf="@+id/button_incr_25"
+        app:layout_constraintTop_toBottomOf="@+id/button_incr_25" />
+
+    <Button
+        android:id="@+id/button_decr_100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/_100mlDecrease"
+        app:layout_constraintStart_toStartOf="@+id/button_decr_25"
+        app:layout_constraintTop_toBottomOf="@+id/button_decr_25" />
+
+    <Button
+        android:id="@+id/button_decr_25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_25mlDecrease"
+        app:layout_constraintStart_toStartOf="@+id/button_decr"
+        app:layout_constraintTop_toBottomOf="@+id/button_decr" />
+
+    <Button
+        android:id="@+id/button_incr_25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_25mlIncrease"
+        app:layout_constraintEnd_toEndOf="@+id/button_incr"
+        app:layout_constraintTop_toBottomOf="@+id/button_incr" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

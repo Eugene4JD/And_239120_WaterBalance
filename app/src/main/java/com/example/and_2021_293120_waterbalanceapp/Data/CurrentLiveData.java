@@ -16,8 +16,7 @@ public class CurrentLiveData extends LiveData<CurrentData> {
             try {
                 CurrentData currentData = snapshot.getValue(CurrentData.class);
                 setValue(currentData);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
 
             }
 
@@ -29,8 +28,8 @@ public class CurrentLiveData extends LiveData<CurrentData> {
         }
     };
     DatabaseReference databaseReference;
-    public CurrentLiveData(DatabaseReference ref)
-    {
+
+    public CurrentLiveData(DatabaseReference ref) {
         this.databaseReference = ref;
     }
 
