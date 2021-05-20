@@ -17,14 +17,14 @@ generate another strategy for hydration.
 - [x] Login functionality
 - [x] Overview of the water consumption goals through the calendar view.
 - [x] Overview of statistics for last period (could be month or year)
-- [x] The ability to set different goals for different days in advance.
+- [ ] The ability to set different goals for different days in advance.
 
 #### Could have:
-- [x] The ability to share results by email
-- [x] The ability to state the weight and age of the user to use for research purposes.
-- [x] Give advice about user future strategies of water consumption using information gathered from user profile settings (weight and age)
+- [ ] The ability to share results by email
+- [ ] The ability to state the weight and age of the user to use for research purposes.
+- [ ] Give advice about user future strategies of water consumption uing information gathered from user profile settings (weight and age)
 
 
 #### Will not have:
--[x] Social network functionality
+-[ ] Social network functionality
 
