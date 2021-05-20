@@ -1,3 +1,6 @@
+![logo](https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.graphicsprings.com%2Ffilestorage%2Fstencils%2Fbc553e3c14e3461e2ccf341924cd219b.png%3Fwidth%3D500%26height%3D500&imgrefurl=https%3A%2F%2Fwww.graphicsprings.com%2Flogographics%2Ffresh-water-drop&tbnid=kDLsIl16nMi8oM&vet=12ahUKEwjS34XA8NjwAhUQwSoKHUKxAV0QMygAegUIARC8AQ..i&docid=bBDwMjWlkAo4jM&w=500&h=500&q=water%20drop%20logo&ved=2ahUKEwjS34XA8NjwAhUQwSoKHUKxAV0QMygAegUIARC8AQ)
+
+######
 The app is helping to control the hydration level of a person. With the ability to plan the amount of water that person wants to drink for each day.
 Besides the ability to set the amount of water for each day, the application will display statistics which will help the user to inspect habits and 
 generate another strategy for hydration.
