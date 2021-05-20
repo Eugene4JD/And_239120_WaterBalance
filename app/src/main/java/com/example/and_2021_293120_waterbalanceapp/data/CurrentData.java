@@ -1,10 +1,11 @@
-package com.example.and_2021_293120_waterbalanceapp.Data;
+package com.example.and_2021_293120_waterbalanceapp.data;
 
 public class CurrentData {
     private double goal;
     private double progress;
 
-    public CurrentData() { }
+    public CurrentData() {
+    }
 
     public CurrentData(double goal, double progress) {
         this.goal = goal;
@@ -27,16 +28,14 @@ public class CurrentData {
         this.progress = progress;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return fmt(this.getProgress()) + " / " + fmt(this.getGoal());
     }
 
-    private static String fmt(double d)
-    {
-        if(d == (long) d)
-            return String.format("%d",(long)d);
+    private static String fmt(double d) {
+        if (d == (long) d)
+            return String.format("%d", (long) d);
         else
-            return String.format("%s",d);
+            return String.format("%s", d);
     }
 }

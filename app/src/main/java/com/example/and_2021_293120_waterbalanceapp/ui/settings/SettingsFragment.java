@@ -1,4 +1,4 @@
-package com.example.and_2021_293120_waterbalanceapp.ui.dashboard;
+package com.example.and_2021_293120_waterbalanceapp.ui.settings;
 
 import android.os.Bundle;
 
@@ -8,6 +8,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.and_2021_293120_waterbalanceapp.R;
+import com.example.and_2021_293120_waterbalanceapp.viewmodel.SettingsViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
@@ -18,7 +19,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.root_preferences,rootKey);
+        setPreferencesFromResource(R.xml.root_preferences, rootKey);
         settingsViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
         signOutButton = findPreference(getString(R.string.sign_out));
         signOutButton.setOnPreferenceClickListener(preference -> {
@@ -30,8 +31,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             if (settingsViewModel.validateStringPreference(newValue.toString()))
                 return true;
             else
-                Snackbar.make(getView(),"Please enter a valid goal, it should be a number more than 0", Snackbar.LENGTH_LONG).show();
-                return false;
+                Snackbar.make(getView(), "Please enter a valid goal, it should be a number more than 0", Snackbar.LENGTH_LONG).show();
+            return false;
         });
 
 

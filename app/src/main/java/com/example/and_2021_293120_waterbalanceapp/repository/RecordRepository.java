@@ -1,7 +1,7 @@
-package com.example.and_2021_293120_waterbalanceapp.Repository;
+package com.example.and_2021_293120_waterbalanceapp.repository;
 
-import com.example.and_2021_293120_waterbalanceapp.Data.Record;
-import com.example.and_2021_293120_waterbalanceapp.Data.RecordLiveData;
+import com.example.and_2021_293120_waterbalanceapp.data.Record;
+import com.example.and_2021_293120_waterbalanceapp.data.RecordLiveData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -16,10 +16,10 @@ public class RecordRepository {
     private RecordLiveData records;
 
 
-    private RecordRepository(){
+    private RecordRepository() {
     }
 
-    public static synchronized RecordRepository getInstance(){
+    public static synchronized RecordRepository getInstance() {
         if (instance == null)
             instance = new RecordRepository();
         return instance;
@@ -44,5 +44,7 @@ public class RecordRepository {
         myRef.setValue(new ArrayList<Record>());
     }
 
-    public RecordLiveData getRecord() {return records;}
+    public RecordLiveData getRecord() {
+        return records;
+    }
 }

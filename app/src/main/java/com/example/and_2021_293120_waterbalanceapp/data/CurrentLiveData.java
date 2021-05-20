@@ -1,4 +1,4 @@
-package com.example.and_2021_293120_waterbalanceapp.Data;
+package com.example.and_2021_293120_waterbalanceapp.data;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;

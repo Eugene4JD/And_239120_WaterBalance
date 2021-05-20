@@ -1,32 +1,22 @@
-package com.example.and_2021_293120_waterbalanceapp.ui.notifications;
-
-import android.util.Log;
+package com.example.and_2021_293120_waterbalanceapp.viewmodel;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Cartesian;
 import com.anychart.charts.Cartesian3d;
 import com.anychart.core.cartesian.series.Area3d;
-import com.anychart.core.cartesian.series.Line;
 import com.anychart.data.Mapping;
 import com.anychart.data.Set;
-import com.anychart.data.View;
 import com.anychart.enums.Anchor;
 import com.anychart.enums.HoverMode;
-import com.anychart.enums.MarkerType;
 import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
-import com.anychart.graphics.vector.Stroke;
 import com.anychart.graphics.vector.hatchfill.HatchFillType;
-import com.example.and_2021_293120_waterbalanceapp.Data.Record;
-import com.example.and_2021_293120_waterbalanceapp.Data.RecordLiveData;
-import com.example.and_2021_293120_waterbalanceapp.Repository.RecordRepository;
+import com.example.and_2021_293120_waterbalanceapp.data.Record;
+import com.example.and_2021_293120_waterbalanceapp.repository.RecordRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +110,7 @@ public class RecordsGraphViewModel extends ViewModel {
             seriesData.add(new CustomDataEntry(displayList.get(i).getTimeStamp(), displayList.get(i).getGoal(), displayList.get(i).getProgress()));
         }
         if (seriesData.size() == 0)
-            seriesData.add(new CustomDataEntry("0",0,0));
+            seriesData.add(new CustomDataEntry("0", 0, 0));
         Set set = Set.instantiate();
         set.data(seriesData);
         Mapping series1Data = set.mapAs("{ x: 'x', value: 'value' }");

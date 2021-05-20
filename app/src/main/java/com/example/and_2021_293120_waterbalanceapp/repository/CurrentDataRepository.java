@@ -1,15 +1,12 @@
-package com.example.and_2021_293120_waterbalanceapp.Repository;
+package com.example.and_2021_293120_waterbalanceapp.repository;
 
-import com.example.and_2021_293120_waterbalanceapp.Data.CurrentData;
-import com.example.and_2021_293120_waterbalanceapp.Data.CurrentLiveData;
-import com.example.and_2021_293120_waterbalanceapp.Data.Record;
-import com.example.and_2021_293120_waterbalanceapp.Data.RecordLiveData;
+import com.example.and_2021_293120_waterbalanceapp.data.CurrentData;
+import com.example.and_2021_293120_waterbalanceapp.data.CurrentLiveData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.List;
 
 public class CurrentDataRepository {
     private static CurrentDataRepository instance;

@@ -1,7 +1,6 @@
-package com.example.and_2021_293120_waterbalanceapp.ui.notifications;
+package com.example.and_2021_293120_waterbalanceapp.ui.recordsGrpahFragment;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.anychart.AnyChartView;
 import com.example.and_2021_293120_waterbalanceapp.R;
 import com.example.and_2021_293120_waterbalanceapp.ui.SignInActivity;
+import com.example.and_2021_293120_waterbalanceapp.viewmodel.RecordsGraphViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class RecordsGraphFragment extends Fragment {
@@ -32,7 +32,6 @@ public class RecordsGraphFragment extends Fragment {
         this.anyChartView = root.findViewById(R.id.any_chart_view);
 
         this.resetButton = root.findViewById(R.id.reset_button);
-        //anyChartView.setProgressBar(findViewById(R.id.progress_bar));
         return root;
     }
 
@@ -58,7 +57,7 @@ public class RecordsGraphFragment extends Fragment {
                         recordsGraphViewModel.removeRecords();
                     });
             builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                Snackbar.make(getView(),"The action is canceled",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(getView(), "The action is canceled", Snackbar.LENGTH_SHORT).show();
             });
 
             AlertDialog dialog = builder.create();

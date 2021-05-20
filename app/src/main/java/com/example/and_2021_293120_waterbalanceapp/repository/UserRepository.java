@@ -1,10 +1,10 @@
-package com.example.and_2021_293120_waterbalanceapp.Repository;
+package com.example.and_2021_293120_waterbalanceapp.repository;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.and_2021_293120_waterbalanceapp.Data.UserLiveData;
+import com.example.and_2021_293120_waterbalanceapp.data.UserLiveData;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -19,7 +19,7 @@ public class UserRepository {
     }
 
     public static synchronized UserRepository getInstance(Application app) {
-        if(instance == null)
+        if (instance == null)
             instance = new UserRepository(app);
         return instance;
     }

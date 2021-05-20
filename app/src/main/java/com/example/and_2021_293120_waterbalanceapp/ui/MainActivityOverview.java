@@ -2,10 +2,10 @@ package com.example.and_2021_293120_waterbalanceapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.and_2021_293120_waterbalanceapp.R;
+import com.example.and_2021_293120_waterbalanceapp.viewmodel.MainActivityOverviewViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivityOverview extends AppCompatActivity {
 
     private MainActivityOverviewViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +26,7 @@ public class MainActivityOverview extends AppCompatActivity {
         checkIfSignedIn();
         setContentView(R.layout.activity_main_overview2);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
@@ -39,7 +39,7 @@ public class MainActivityOverview extends AppCompatActivity {
         viewModel.getCurrentUser().observe(this, user -> {
             if (user != null) {
                 String message = "Welcome " + user.getDisplayName();
-                Toast.makeText(this.getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             } else
                 startLoginActivity();
         });
@@ -48,9 +48,5 @@ public class MainActivityOverview extends AppCompatActivity {
     private void startLoginActivity() {
         startActivity(new Intent(this, SignInActivity.class));
         finish();
-    }
-
-    public void signOut(View v) {
-        viewModel.signOut();
     }
 }

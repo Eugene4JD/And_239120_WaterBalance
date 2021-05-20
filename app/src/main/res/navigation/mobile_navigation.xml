@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.and_2021_293120_waterbalanceapp.ui.dashboard.SettingsFragment"
+        android:name="com.example.and_2021_293120_waterbalanceapp.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.and_2021_293120_waterbalanceapp.ui.notifications.RecordsGraphFragment"
+        android:name="com.example.and_2021_293120_waterbalanceapp.ui.recordsGrpahFragment.RecordsGraphFragment"
         android:label="@string/title_graph"
         tools:layout="@layout/fragment_recordsgraph" />
 </navigation>

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.and_2021_293120_waterbalanceapp.R;
+import com.example.and_2021_293120_waterbalanceapp.viewmodel.SignInViewModel;
 import com.firebase.ui.auth.AuthUI;
 
 import java.util.Arrays;

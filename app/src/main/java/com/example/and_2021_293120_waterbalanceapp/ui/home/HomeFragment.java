@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +14,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.and_2021_293120_waterbalanceapp.Data.CurrentData;
 import com.example.and_2021_293120_waterbalanceapp.R;
 import com.example.and_2021_293120_waterbalanceapp.ui.SignInActivity;
+import com.example.and_2021_293120_waterbalanceapp.viewmodel.HomeViewModel;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class HomeFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -107,29 +103,25 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         });
 
         buttonDecreaseHundred.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue().getProgress() - 100 < 0)
-            {
-                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
-                       .setActionTextColor(Color.RED)
+            if (homeViewModel.getCurrentData().getValue().getProgress() - 100 < 0) {
+                Snackbar.make(getView(), "The progress can not go below zero", Snackbar.LENGTH_LONG)
+                        .setActionTextColor(Color.RED)
                         .show();
-            }
-            else
+            } else
                 this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 100);
         });
 
         buttonIncreaseTwentyFive.setOnClickListener(v -> {
-                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 25);
+            this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 25);
         });
 
 
         buttonDecreaseTwentyFive.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue().getProgress() - 25 < 0)
-            {
-                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
+            if (homeViewModel.getCurrentData().getValue().getProgress() - 25 < 0) {
+                Snackbar.make(getView(), "The progress can not go below zero", Snackbar.LENGTH_LONG)
                         .setActionTextColor(Color.RED)
                         .show();
-            }
-            else
+            } else
                 this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 25);
         });
 
@@ -138,22 +130,17 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         });
 
         buttonDecreaseFive.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue().getProgress() - 5 < 0)
-            {
-                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
+            if (homeViewModel.getCurrentData().getValue().getProgress() - 5 < 0) {
+                Snackbar.make(getView(), "The progress can not go below zero", Snackbar.LENGTH_LONG)
                         .setActionTextColor(Color.RED)
                         .show();
-            }
-            else
+            } else
                 this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 5);
         });
     }
 
 
-
-
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
-    {
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress());
     }
 }
