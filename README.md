@@ -1,11 +1,11 @@
 ![logo](https://www.graphicsprings.com/filestorage/stencils/bc553e3c14e3461e2ccf341924cd219b.png?width=500&height=500)
-##Water Balance
+## Water Balance
 ######
 The app is helping to control the hydration level of a person. With the ability to plan the amount of water that person wants to drink for each day.
 Besides the ability to set the amount of water for each day, the application will display statistics which will help the user to inspect habits and 
 generate another strategy for hydration.
 
-###MoSCoW requirements:
+### MoSCoW requirements:
 
 #### Must have:
 
