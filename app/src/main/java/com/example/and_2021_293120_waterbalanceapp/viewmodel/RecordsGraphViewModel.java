@@ -37,7 +37,7 @@ public class RecordsGraphViewModel extends ViewModel {
 
         area3d.animation(true);
 
-        area3d.yAxis(0).title("The Share Price");
+        area3d.yAxis(0).title("Millilitres");
         area3d.xAxis(0).title("Year/Month/Day");
         area3d.xAxis(0).labels().padding(5d, 5d, 0d, 5d);
 

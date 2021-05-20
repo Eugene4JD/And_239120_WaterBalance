@@ -47,6 +47,7 @@ public class SignInActivity extends AppCompatActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setIsSmartLockEnabled(false)
                 .setLogo(R.drawable.ic_baseline_opacity_24)
                 .build();
 

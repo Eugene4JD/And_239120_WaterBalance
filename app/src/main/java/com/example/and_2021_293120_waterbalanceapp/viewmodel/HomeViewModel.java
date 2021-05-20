@@ -44,12 +44,12 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
     public void saveRecord(Double progress) {
-        displayList.add(new Record(Double.parseDouble(sharedPreferences.getString("goal_pref", "101.0")), progress));
+        displayList.add(new Record(Double.parseDouble(sharedPreferences.getString("goal_pref", "2000.0")), progress));
         recordRepository.saveRecord(displayList);
     }
 
     public void saveCurrentData(Double progress) {
-        currentDataRepository.saveCurrentData(Double.parseDouble(sharedPreferences.getString("goal_pref", "101.0")), progress);
+        currentDataRepository.saveCurrentData(Double.parseDouble(sharedPreferences.getString("goal_pref", "2000.0")), progress);
     }
 
     public void setDisplayList(List<Record> records) {

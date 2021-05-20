@@ -69,88 +69,78 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
                 new ViewModelProvider(this).get(HomeViewModel.class);
         try {
             homeViewModel.init();
+            homeViewModel.getCurrentData().observe(getViewLifecycleOwner(), currentData -> {
+                if (currentData != null) {
+                    progress_textView.setText(currentData.toString());
+                    progressBar.setProgress((int) (currentData.getProgress() / currentData.getGoal() * 100));
+                } else
+                    homeViewModel.saveCurrentData(0.0);
+            });
+
+            homeViewModel.getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+
+            homeViewModel.getRecords().observe(getViewLifecycleOwner(), records -> {
+                if (records != null) {
+                    homeViewModel.setDisplayList(records);
+                }
+            });
+
+            saveButton.setOnClickListener(v -> {
+                homeViewModel.saveRecord(homeViewModel.getCurrentData().getValue().getProgress());
+                homeViewModel.saveCurrentData(0.0);
+            });
+
+            resetButton.setOnClickListener(v -> {
+                homeViewModel.saveCurrentData(0.0);
+            });
+
+            buttonIncreaseHundred.setOnClickListener(v -> {
+                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 100);
+            });
+
+            buttonDecreaseHundred.setOnClickListener(v -> {
+                if (homeViewModel.getCurrentData().getValue().getProgress() - 100 < 0) {
+                    Snackbar.make(getView(), "The progress can not go below zero", Snackbar.LENGTH_LONG)
+                            .setActionTextColor(Color.RED)
+                            .show();
+                } else
+                    this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 100);
+            });
+
+            buttonIncreaseTwentyFive.setOnClickListener(v -> {
+                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 25);
+            });
+
+
+            buttonDecreaseTwentyFive.setOnClickListener(v -> {
+                if (homeViewModel.getCurrentData().getValue().getProgress() - 25 < 0) {
+                    Snackbar.make(getView(), "The progress can not go below zero", Snackbar.LENGTH_LONG)
+                            .setActionTextColor(Color.RED)
+                            .show();
+                } else
+                    this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 25);
+            });
+
+            buttonIncreaseFive.setOnClickListener(v -> {
+                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 5);
+            });
+
+            buttonDecreaseFive.setOnClickListener(v -> {
+                if (homeViewModel.getCurrentData().getValue().getProgress() - 5 < 0) {
+                    Snackbar.make(getView(), "The progress can not go below zero", Snackbar.LENGTH_LONG)
+                            .setActionTextColor(Color.RED)
+                            .show();
+                } else
+                    this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 5);
+            });
         } catch (Exception e) {
             startActivity(new Intent(getContext(), SignInActivity.class));
             getActivity().finish();
         }
-
-        homeViewModel.getCurrentData().observe(getViewLifecycleOwner(), currentData -> {
-            if (currentData != null) {
-                progress_textView.setText(currentData.toString());
-                progressBar.setProgress((int) (currentData.getProgress() / currentData.getGoal() * 100));
-            } else
-                homeViewModel.saveCurrentData(0.0);
-        });
-
-        homeViewModel.getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-
-        homeViewModel.getRecords().observe(getViewLifecycleOwner(), records -> {
-            if (records != null) {
-                homeViewModel.setDisplayList(records);
-            }
-        });
-
-        saveButton.setOnClickListener(v -> {
-            homeViewModel.saveRecord(homeViewModel.getCurrentData().getValue().getProgress());
-            homeViewModel.saveCurrentData(0.0);
-        });
-
-        resetButton.setOnClickListener(v -> {
-            homeViewModel.saveCurrentData(0.0);
-        });
-
-        buttonIncreaseHundred.setOnClickListener(v -> {
-            this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 100);
-        });
-
-        buttonDecreaseHundred.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue().getProgress() - 100 < 0)
-            {
-                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
-                       .setActionTextColor(Color.RED)
-                        .show();
-            }
-            else
-                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 100);
-        });
-
-        buttonIncreaseTwentyFive.setOnClickListener(v -> {
-                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 25);
-        });
-
-
-        buttonDecreaseTwentyFive.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue().getProgress() - 25 < 0)
-            {
-                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
-                        .setActionTextColor(Color.RED)
-                        .show();
-            }
-            else
-                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 25);
-        });
-
-        buttonIncreaseFive.setOnClickListener(v -> {
-            this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() + 5);
-        });
-
-        buttonDecreaseFive.setOnClickListener(v -> {
-            if (homeViewModel.getCurrentData().getValue().getProgress() - 5 < 0)
-            {
-                Snackbar.make(getView(),"The progress can not go below zero",Snackbar.LENGTH_LONG)
-                        .setActionTextColor(Color.RED)
-                        .show();
-            }
-            else
-                this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress() - 5);
-        });
     }
 
 
-
-
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
-    {
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         this.homeViewModel.saveCurrentData(homeViewModel.getCurrentData().getValue().getProgress());
     }
 }
