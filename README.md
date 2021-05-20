@@ -26,5 +26,5 @@ generate another strategy for hydration.
 
 
 #### Will not have:
--[ ] Social network functionality
+- [ ] Social network functionality
 
